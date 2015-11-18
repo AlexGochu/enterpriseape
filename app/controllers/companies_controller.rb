@@ -1,11 +1,15 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
 
-  respond_to :html
+  #respond_to :html
 
   def index
     @companies = Company.all
-    respond_with(@companies)
+    respond_to do |format|
+      format.html
+      format.csv { render text: @companies.to_csv }
+    end
+    #respond_with(@companies)
   end
 
   def show
