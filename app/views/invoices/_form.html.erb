@@ -33,14 +33,10 @@
           <%= f.text_field :tax %>
         </div>
       </div>
-
-
-
       <div class="form-group">
-        <%= f.label :saleperson, class: 'col-sm-2 control-label' %>
-
+        <%= f.label :employee_id, class:'col-sm-2 control-label' %>
         <div class="col-sm-10">
-          <%= f.text_field :saleperson %>
+          <%= collection_select(:invoice, :employee_id, Employee.all, :id, :name, {}, {:multiple => false}) %>
         </div>
       </div>
 
@@ -56,7 +52,6 @@
       <div class="form-group">
         <div class="col-sm-2"></div>
         <div class="col-sm-10">
-
           <%= f.submit 'Submit', class:'btn btn-default' %>
         </div>
       </div>
