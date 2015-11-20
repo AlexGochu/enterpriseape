@@ -22,8 +22,17 @@ class EmployeesController < ApplicationController
 
   def create
     @employee = Employee.new(employee_params)
-    @employee.save
-    respond_with(@employee)
+    respond_to do |format|
+      if @employee.save
+        format.html { redirect_to @employee, notice: 'Invoice was successfully created.' }
+        format.json { render :show, status: :created, location: @employee }
+      else
+        format.html { render :new }
+        format.json { render json: @employee.errors, status: :unprocessable_entity }
+      end
+    end
+    #@employee.save
+    #respond_with(@employee)
   end
 
   def update
